@@ -6,7 +6,8 @@ export interface Pokemon {
     name: string;
     types: string[];
     avatar: string;
-    sprites: string[];
+    sprites?: string[];
+
 
 
     // todo:
