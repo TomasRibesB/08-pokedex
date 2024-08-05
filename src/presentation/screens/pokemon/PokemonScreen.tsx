@@ -12,6 +12,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { globalTheme } from "../../../config/theme/global-theme";
+import { FABButtonBack } from "../../components/ui/FABButtonBack";
+import { ValueChip } from "../../components/ui/ValueChip";
 
 interface Props extends StackScreenProps<RootStackParam, 'PokemonScreen'> { }
 
@@ -120,13 +123,13 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                    <Chip
-                        key={item.name}
-                        mode="outlined"
+
+                    <ValueChip
                         selectedColor={pokemon.textColor}
-                        style={{ marginLeft: 10 }}>
-                        {Formatter.capitalize(item.name)}: {item.value}
-                    </Chip>
+                        margin={true}
+                        label={Formatter.capitalize(item.name)}
+                        value={item.value.toString()}
+                    />
                 )}
             />
 
@@ -138,13 +141,12 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 keyExtractor={item => item.name}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                    <Chip
-                        key={item.name}
-                        mode="outlined"
+                    <ValueChip
                         selectedColor={pokemon.textColor}
-                        style={{ marginLeft: 10 }}>
-                        {Formatter.capitalize(item.name)}
-                    </Chip>
+                        margin={true}
+                        label={Formatter.capitalize(item.name)}
+                        value={'lv' + item.level.toString()}
+                    />
                 )}
             />
 
@@ -166,20 +168,22 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 )}
             />
 
-            <Button icon='chevron-back' onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id + 1 })} 
-            mode="contained-tonal" style={styles.buttonNext} buttonColor={pokemon.textColor}>
-                Next
-            </Button>
+            <FAB icon="chevron-forward"
+                style={[globalTheme.fab, { backgroundColor: pokemon.textColor, flexDirection: 'row-reverse' }]}
+                color={pokemon.color}
+                onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id + 1 })} />
 
-            <Button onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id - 1 })} 
-            mode="contained-tonal" style={styles.buttonBack} buttonColor={pokemon.textColor}>
-                Back <Icon name="chevron-back" size={20} color="white" />
-            </Button>
+            <FAB icon="chevron-back"
+                style={[globalTheme.fabL, { backgroundColor: pokemon.textColor }]}
+                color={pokemon.color}
+                onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id - 1 })} />
 
-            <Button onPress={() => navigation.navigate('HomeScreen')} mode="contained-tonal"
+            <FABButtonBack />
+
+            {/* <Button onPress={() => navigation.navigate('HomeScreen')} mode="contained-tonal"
             style={styles.buttonHome} buttonColor={pokemon.textColor}>
                 Home
-            </Button>
+            </Button> */}
 
 
             <View style={{ height: 100 }} />
@@ -232,27 +236,5 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         marginHorizontal: 20,
         alignItems: 'center',
-    },
-    buttonNext: {
-        position: 'absolute',
-        margin: 16,
-        right: 0,
-        bottom: 0,
-    },
-    buttonBack: {
-        position: 'absolute',
-        margin: 16,
-        left: 0,
-        bottom: 0,
-    },
-    buttonHome: {
-        //abajo al centro de los 2 botones
-        position: 'absolute',
-        margin: 16,
-        marginHorizontal: 130,
-        bottom: 0,
-        left: 0,
-        right: 0,
-    
     },
 });

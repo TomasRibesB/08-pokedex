@@ -12,6 +12,7 @@ import { FullScreenLoader } from "../../components/ui/FullScreenLoader";
 import { useDebounceValue } from "../../hooks/useDebounceValue";
 import LoaderKit from 'react-native-loader-kit'
 import { PokedexBg } from "../../components/ui/PokeDexBg";
+import { FABButtonBack } from "../../components/ui/FABButtonBack";
 
 export const SearchScreen = () => {
     const [term, setterm] = useState('')
@@ -54,7 +55,7 @@ export const SearchScreen = () => {
     }
 
     return (
-        <View style={[globalTheme.globalMargin, { paddingTop: top + 10 }]}>
+        <View style={[globalTheme.globalMargin, { paddingTop: top + 20 }]}>
             <PokedexBg style={{
                 position: 'absolute',
                 top: height * 0.1,
@@ -69,6 +70,7 @@ export const SearchScreen = () => {
                 autoCorrect={false}
                 onChangeText={setterm}
                 value={term}
+                style={{ width: width - width*0.2}}
             />
 
             {isLoadingPokemons && <LoaderKit
@@ -89,6 +91,8 @@ export const SearchScreen = () => {
                 showsVerticalScrollIndicator={false}
                 ListFooterComponent={<View style={{ height: 150 }} />}
             />
+
+            <FABButtonBack />
 
 
         </View>

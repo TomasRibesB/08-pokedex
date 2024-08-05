@@ -65,7 +65,7 @@ export const HomeScreen = ({ navigation }: Props) => {
             />
 
             <FAB 
-            label="Buscar"
+            icon="search-outline"
             style={[globalTheme.fab, {backgroundColor: theme.colors.primary}]}
             mode="elevated"
             onPress={() => navigation.navigate('SearchScreen')}
