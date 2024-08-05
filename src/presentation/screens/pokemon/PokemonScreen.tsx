@@ -70,12 +70,26 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 {pokemon.types.map(type => (
                     <Chip
                         key={type}
-                        mode="outlined"
-                        selectedColor={pokemon.textColor}
-                        style={{ marginLeft: 10 }}>
+                        mode="flat"
+                        selectedColor={pokemon.color}
+                        style={{ marginLeft: 10, backgroundColor: pokemon.textColor }}>
                         {type}
                     </Chip>
                 ))}
+            </View>
+
+            <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
+
+                <FAB icon="chevron-forward"
+                    style={[globalTheme.fab, { backgroundColor: pokemon.textColor, flexDirection: 'row-reverse' }]}
+                    color={pokemon.color}
+                    onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id + 1 })} />
+
+                <FAB icon="chevron-back"
+                    style={[globalTheme.fabL, { backgroundColor: pokemon.textColor }]}
+                    color={pokemon.color}
+                    onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id - 1 })} />
+
             </View>
 
             {/* Sprites */}
@@ -167,16 +181,6 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     </Chip>
                 )}
             />
-
-            <FAB icon="chevron-forward"
-                style={[globalTheme.fab, { backgroundColor: pokemon.textColor, flexDirection: 'row-reverse' }]}
-                color={pokemon.color}
-                onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id + 1 })} />
-
-            <FAB icon="chevron-back"
-                style={[globalTheme.fabL, { backgroundColor: pokemon.textColor }]}
-                color={pokemon.color}
-                onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id - 1 })} />
 
             <FABButtonBack />
 
