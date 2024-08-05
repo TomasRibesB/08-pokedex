@@ -58,10 +58,11 @@ export const SearchScreen = () => {
         <View style={[globalTheme.globalMargin, { paddingTop: top + 20 }]}>
             <PokedexBg style={{
                 position: 'absolute',
-                top: height * 0.1,
-                right: -width * 0.4,
-                width: width * 1.7,
-                height: width * 1.7,
+                top: height * -0.2,
+                right: -width * 0.2,
+                width: width * 1.3,
+                height: width * 1.3,
+                transform: [{ rotate: '180deg' }]
             }} />
             <TextInput
                 placeholder="Buscar Pokémon"

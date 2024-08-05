@@ -73,7 +73,8 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                         mode="flat"
                         selectedColor={pokemon.color}
                         style={{ marginLeft: 10, backgroundColor: pokemon.textColor }}>
-                        {type}
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}> {type.toLocaleUpperCase()
+                        }</Text>
                     </Chip>
                 ))}
             </View>
@@ -124,7 +125,9 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                         mode="outlined"
                         selectedColor={pokemon.textColor}
                         style={{ marginLeft: 10 }}>
-                        {Formatter.capitalize(item)}
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>
+                            {Formatter.capitalize(item)}
+                        </Text>
                     </Chip>
                 )}
             />
@@ -177,7 +180,9 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                         mode="outlined"
                         selectedColor={pokemon.textColor}
                         style={{ marginLeft: 10 }}>
-                        {Formatter.capitalize(item)}
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>
+                            {Formatter.capitalize(item)}
+                        </Text>
                     </Chip>
                 )}
             />
