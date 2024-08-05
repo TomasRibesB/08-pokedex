@@ -1,6 +1,7 @@
 
 import { View } from "react-native"
-import { ActivityIndicator, useTheme } from "react-native-paper"
+import { useTheme } from "react-native-paper"
+import LoaderKit from 'react-native-loader-kit'
 
 export const FullScreenLoader = () => {
 
@@ -13,7 +14,11 @@ export const FullScreenLoader = () => {
             alignItems: 'center',
             backgroundColor: colors.background
         }}>
-            <ActivityIndicator size={50} />
+            <LoaderKit
+                style={{ width: 50, height: 50 }}
+                name={'BallZigZag'}
+                color={colors.primary}
+            />
         </View>
     )
 }

@@ -2,7 +2,7 @@
 import { FlatList, View } from "react-native"
 import { globalTheme } from "../../../config/theme/global-theme"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ActivityIndicator, Text, TextInput } from "react-native-paper";
+import { ActivityIndicator, Text, TextInput, useTheme } from "react-native-paper";
 import { Pokemon } from "../../../domain/entities/pokemon";
 import { PokemonCard } from "../../components/pokemons/PokemonCard";
 import { useQuery } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import { getPokemonNamesWithId, getPokemonsByIds } from "../../../actions/pokemo
 import { useMemo, useState } from "react";
 import { FullScreenLoader } from "../../components/ui/FullScreenLoader";
 import { useDebounceValue } from "../../hooks/useDebounceValue";
+import LoaderKit from 'react-native-loader-kit'
 
 export const SearchScreen = () => {
     const [term, setterm] = useState('')
@@ -18,8 +19,10 @@ export const SearchScreen = () => {
 
     const { top } = useSafeAreaInsets();
 
+    const theme = useTheme();
+
     const { isLoading, data: pokemonNameList = [] } = useQuery({
-        queryKey:['pokemon', 'all'],
+        queryKey: ['pokemon', 'all'],
         queryFn: () => getPokemonNamesWithId()
     });
 
@@ -36,7 +39,7 @@ export const SearchScreen = () => {
 
     }, [debouncedValue])
 
-    const {isLoading: isLoadingPokemons, data:pokemons = []} = useQuery({
+    const { isLoading: isLoadingPokemons, data: pokemons = [] } = useQuery({
         queryKey: ['pokemon', 'by', pokemonNameIdList],
         queryFn: () => getPokemonsByIds(pokemonNameIdList.map(pokemon => pokemon.id)),
         staleTime: 1000 * 60 * 5
@@ -52,15 +55,19 @@ export const SearchScreen = () => {
         <View style={[globalTheme.globalMargin, { paddingTop: top + 10 }]}>
             <TextInput
                 placeholder="Buscar Pokémon"
-                mode="flat"
+                mode="outlined"
                 autoFocus
                 autoCorrect={false}
                 onChangeText={setterm}
                 value={term}
             />
 
-            {isLoadingPokemons && <ActivityIndicator style={{ marginTop: 20 }} />}
-            
+            {isLoadingPokemons && <LoaderKit
+                style={{ width: 50, height: 50, marginTop: 20, alignSelf: 'center' }}
+                name={'BallZigZagDeflect'}
+                color={theme.colors.primary}
+            />}
+
 
             <FlatList
                 data={pokemons}

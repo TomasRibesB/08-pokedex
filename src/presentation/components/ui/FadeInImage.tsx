@@ -8,6 +8,8 @@ import {
     View,
 } from 'react-native';
 import { useAnimation } from '../../hooks/useAnimation';
+import LoaderKit from 'react-native-loader-kit'
+import { useTheme } from 'react-native-paper';
 interface Props {
     uri: string;
     style?: StyleProp<ImageStyle>;
@@ -18,6 +20,8 @@ export const FadeInImage = ({ uri, style }: Props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const isDisposed = useRef(false);
+
+    const theme = useTheme();
 
     useEffect(() => {
         return () => {
@@ -35,10 +39,10 @@ export const FadeInImage = ({ uri, style }: Props) => {
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             {isLoading && (
-                <ActivityIndicator
-                    style={{ position: 'absolute' }}
-                    color="grey"
-                    size={30}
+                <LoaderKit
+                    style={{ width: 50, height: 50, position: 'absolute' }}
+                    name={'BallZigZagDeflect'}
+                    color={theme.colors.primary}
                 />
             )}
 
