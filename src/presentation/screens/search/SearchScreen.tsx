@@ -1,5 +1,5 @@
 
-import { FlatList, View } from "react-native"
+import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native"
 import { globalTheme } from "../../../config/theme/global-theme"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ActivityIndicator, Text, TextInput, useTheme } from "react-native-paper";
@@ -11,6 +11,7 @@ import { useMemo, useState } from "react";
 import { FullScreenLoader } from "../../components/ui/FullScreenLoader";
 import { useDebounceValue } from "../../hooks/useDebounceValue";
 import LoaderKit from 'react-native-loader-kit'
+import { PokedexBg } from "../../components/ui/PokeDexBg";
 
 export const SearchScreen = () => {
     const [term, setterm] = useState('')
@@ -18,6 +19,7 @@ export const SearchScreen = () => {
     const debouncedValue = useDebounceValue(term);
 
     const { top } = useSafeAreaInsets();
+    const { width, height } = useWindowDimensions();
 
     const theme = useTheme();
 
@@ -53,6 +55,13 @@ export const SearchScreen = () => {
 
     return (
         <View style={[globalTheme.globalMargin, { paddingTop: top + 10 }]}>
+            <PokedexBg style={{
+                position: 'absolute',
+                top: height * 0.1,
+                right: -width * 0.4,
+                width: width * 1.7,
+                height: width * 1.7,
+            }} />
             <TextInput
                 placeholder="Buscar Pokémon"
                 mode="outlined"

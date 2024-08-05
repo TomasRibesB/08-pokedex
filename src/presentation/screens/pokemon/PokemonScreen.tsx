@@ -4,13 +4,14 @@ import { FlatList, Image, ScrollView, StyleSheet, View } from "react-native"
 import { RootStackParam } from "../../navigator/StackNavigator"
 import { getPokemonById } from "../../../actions/pokemons";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Chip, Text } from "react-native-paper";
+import { Button, Chip, FAB, Text } from "react-native-paper";
 import { FullScreenLoader } from "../../components/ui/FullScreenLoader";
 import { Formatter } from "../../../config/helpers/formatters";
 import { FadeInImage } from "../../components/ui/FadeInImage";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props extends StackScreenProps<RootStackParam, 'PokemonScreen'> { }
 
@@ -165,14 +166,14 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 )}
             />
 
-            <Button onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id + 1 })} 
+            <Button icon='chevron-back' onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id + 1 })} 
             mode="contained-tonal" style={styles.buttonNext} buttonColor={pokemon.textColor}>
                 Next
             </Button>
 
             <Button onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id - 1 })} 
             mode="contained-tonal" style={styles.buttonBack} buttonColor={pokemon.textColor}>
-                Back
+                Back <Icon name="chevron-back" size={20} color="white" />
             </Button>
 
             <Button onPress={() => navigation.navigate('HomeScreen')} mode="contained-tonal"

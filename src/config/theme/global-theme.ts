@@ -10,5 +10,15 @@ export const globalTheme = StyleSheet.create({
         position: 'absolute',
         bottom: 20,
         right: 20,
-    }
+    },
+    fabL: {
+        position: 'absolute',
+        bottom: 20,
+        left: 20,
+    },
+    fabTR: {
+        position: 'absolute',
+        top: 20,
+        right: 20,
+    },
 });
