@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "android:dev": "npx react-native run-android",
-    "buildAPK": "cd android && gradlew.bat assembleRelease",
+    "buildAPK": "cd android && gradlew.bat app:assembleRelease",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
