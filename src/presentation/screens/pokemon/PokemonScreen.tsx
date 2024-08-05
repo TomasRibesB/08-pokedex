@@ -4,7 +4,7 @@ import { FlatList, Image, ScrollView, StyleSheet, View } from "react-native"
 import { RootStackParam } from "../../navigator/StackNavigator"
 import { getPokemonById } from "../../../actions/pokemons";
 import { useQuery } from "@tanstack/react-query";
-import { Chip, Text } from "react-native-paper";
+import { Button, Chip, Text } from "react-native-paper";
 import { FullScreenLoader } from "../../components/ui/FullScreenLoader";
 import { Formatter } from "../../../config/helpers/formatters";
 import { FadeInImage } from "../../components/ui/FadeInImage";
@@ -165,6 +165,21 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                 )}
             />
 
+            <Button onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id + 1 })} 
+            mode="contained-tonal" style={styles.buttonNext} buttonColor={pokemon.textColor}>
+                Next
+            </Button>
+
+            <Button onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id - 1 })} 
+            mode="contained-tonal" style={styles.buttonBack} buttonColor={pokemon.textColor}>
+                Back
+            </Button>
+
+            <Button onPress={() => navigation.navigate('HomeScreen')} mode="contained-tonal"
+            style={styles.buttonHome} buttonColor={pokemon.textColor}>
+                Home
+            </Button>
+
 
             <View style={{ height: 100 }} />
         </ScrollView>
@@ -217,5 +232,26 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         alignItems: 'center',
     },
-
+    buttonNext: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+    },
+    buttonBack: {
+        position: 'absolute',
+        margin: 16,
+        left: 0,
+        bottom: 0,
+    },
+    buttonHome: {
+        //abajo al centro de los 2 botones
+        position: 'absolute',
+        margin: 16,
+        marginHorizontal: 130,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    
+    },
 });
