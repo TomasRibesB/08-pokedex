@@ -62,12 +62,12 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
             {/* Types */}
             <View
-                style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10 }}>
+                style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10, justifyContent: 'center' }}>
                 {pokemon.types.map(type => (
                     <Chip
                         key={type}
                         mode="outlined"
-                        selectedColor="white"
+                        selectedColor={pokemon.textColor}
                         style={{ marginLeft: 10 }}>
                         {type}
                     </Chip>
@@ -94,7 +94,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
             />
 
             {/* abilities */}
-            <Text style={styles.subTitle}>Abilities</Text>
+            <Text style={[styles.subTitle, { color: pokemon.textColor }]}>Abilities</Text>
             <FlatList
                 data={pokemon.abilities}
                 keyExtractor={item => item}
@@ -104,7 +104,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     <Chip
                         key={item}
                         mode="outlined"
-                        selectedColor="white"
+                        selectedColor={pokemon.textColor}
                         style={{ marginLeft: 10 }}>
                         {Formatter.capitalize(item)}
                     </Chip>
@@ -112,41 +112,43 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
             />
 
             {/* Stats */}
-            <Text style={styles.subTitle}>Stats</Text>
+            <Text style={[styles.subTitle, { color: pokemon.textColor }]}>Stats</Text>
             <FlatList
                 data={pokemon.stats}
                 keyExtractor={item => item.name}
                 horizontal
-                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                    <View style={styles.statsContainer}>
-                        <Text style={{ color: 'white', fontSize: 18 }}>
-                            {Formatter.capitalize(item.name)}: {item.value}
-                        </Text>
-                    </View>
+                    <Chip
+                        key={item.name}
+                        mode="outlined"
+                        selectedColor={pokemon.textColor}
+                        style={{ marginLeft: 10 }}>
+                        {Formatter.capitalize(item.name)}: {item.value}
+                    </Chip>
                 )}
             />
 
             {/* Moves */}
-            <Text style={styles.subTitle}>Moves</Text>
+            <Text style={[styles.subTitle, { color: pokemon.textColor }]}>Moves</Text>
             <FlatList
                 horizontal
                 data={pokemon.moves}
                 keyExtractor={item => item.name}
-                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                    <View style={styles.statsContainer}>
-                        <Text style={{ color: 'white', fontSize: 18 }}>
-                            {Formatter.capitalize(item.name)}
-                            {'\n'}
-                                lvl {item.level}
-                        </Text>
-                    </View>
+                    <Chip
+                        key={item.name}
+                        mode="outlined"
+                        selectedColor={pokemon.textColor}
+                        style={{ marginLeft: 10 }}>
+                        {Formatter.capitalize(item.name)}
+                    </Chip>
                 )}
             />
 
             {/* Games */}
-            <Text style={styles.subTitle}>Games</Text>
+            <Text style={[styles.subTitle, { color: pokemon.textColor }]}>Games</Text>
             <FlatList
                 data={pokemon.games}
                 keyExtractor={item => item}
@@ -156,7 +158,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     <Chip
                         key={item}
                         mode="outlined"
-                        selectedColor="white"
+                        selectedColor={pokemon.textColor}
                         style={{ marginLeft: 10 }}>
                         {Formatter.capitalize(item)}
                     </Chip>

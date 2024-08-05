@@ -9,6 +9,7 @@ export interface Pokemon {
     sprites?: string[];
 
     color: string;
+    textColor: string;
 
     games: string[];
     stats: Stat[];

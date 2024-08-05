@@ -19,7 +19,8 @@ export const PokemonCard = ({ pokemon }: Props) => {
         style={{ flex: 1 }}
             onPress={() => navigation.navigate('PokemonScreen', { pokemonId: pokemon.id })}>
             <Card style={[styles.cardContainer, { backgroundColor: pokemon.color, }]}>
-                <Text style={styles.name} variant="bodyLarge" lineBreakMode="middle">
+                <Text style={[styles.name, { color: pokemon.textColor }]} 
+                variant="bodyLarge" lineBreakMode="middle">
                     {pokemon.name}
                     {'\n#' + pokemon.id}
                 </Text>
@@ -39,7 +40,7 @@ export const PokemonCard = ({ pokemon }: Props) => {
                 />
 
                 {/* Types */}
-                <Text style={[styles.name, { marginTop: 35 }]}>
+                <Text style={[styles.name, { marginTop: 35, color: pokemon.textColor }]}>
                     {pokemon.types[0]}
                 </Text>
 

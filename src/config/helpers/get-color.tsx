@@ -1,6 +1,6 @@
 import ImageColors from "react-native-image-colors"
 
-export const getColorFromImage = async(image: string) => {
+export const getColorFromImage = async (image: string) => {
 
     const fallbackColor = 'grey';
 

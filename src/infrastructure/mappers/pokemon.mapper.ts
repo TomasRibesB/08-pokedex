@@ -1,6 +1,7 @@
 import { getColorFromImage } from "../../config/helpers/get-color";
 import { Pokemon } from "../../domain/entities/pokemon";
 import { PokeAPIPokemon } from "../interfaces/pokeApi.interfaces";
+import tinycolor from "tinycolor2";
 
 
 
@@ -11,6 +12,7 @@ export class PokemonMapper {
         const avatar = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
 
         const color = await getColorFromImage(avatar);
+        const textColor = tinycolor(color).isDark() ? tinycolor(color).lighten(40).toString() : tinycolor(color).darken(40).toString();
 
         return {
             id: data.id,
@@ -19,6 +21,7 @@ export class PokemonMapper {
             types: data.types.map(type => type.type.name),
             sprites: sprites,
             color: color,
+            textColor: textColor,
 
             games: data.game_indices.map(game => game.version.name),
             abilities: data.abilities.map(ability => ability.ability.name),
